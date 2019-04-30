@@ -278,9 +278,16 @@ Debe tener la opción de buscar por: apellido o cédula.
     $idLogin = $_SESSION['id'];
     $nombre = $_SESSION['usuario'];
     require '../../clases_negocio/clase_conexion.php';
+    require '../../clases_negocio/funciones_oa_profesor.php';
+    require '../../clases_negocio/funciones_oa_estudiante.php';
 
     $conexion = new Conexion();
-    $statement = "SELECT pro.apellidos, u.usuario,  u.tipo_usuario, pro.ci, pro.mail ,u.idUsuario, OA.ruta FROM estudiante AS pro JOIN usuario AS u ON (pro.id_usuario=u.idUsuario) JOIN objeto_aprendizaje AS OA ON OA.id_usuario=u.idUsuario Where pro.id_usuario in ( select id_usuario from objeto_aprendizaje Where idobjeto_aprendizaje > 0)";
+    if(obtener_tipo_usuario_con_id($idLogin) == 'PRO'){
+        $statement = "SELECT pro.apellidos, u.usuario,  u.tipo_usuario, pro.ci, pro.mail ,u.idUsuario, OA.ruta FROM profesor AS pro JOIN usuario AS u ON (pro.id_usuario=u.idUsuario) JOIN objeto_aprendizaje AS OA ON OA.id_usuario=u.idUsuario Where pro.id_usuario in ( select id_usuario from objeto_aprendizaje Where idobjeto_aprendizaje > 0)";
+    }
+    if(obtener_tipo_usuario_con_id($idLogin) == 'EST'){
+        $statement = "SELECT pro.apellidos, u.usuario,  u.tipo_usuario, pro.ci, pro.mail ,u.idUsuario, OA.ruta FROM estudiante AS pro JOIN usuario AS u ON (pro.id_usuario=u.idUsuario) JOIN objeto_aprendizaje AS OA ON OA.id_usuario=u.idUsuario Where pro.id_usuario in ( select id_usuario from objeto_aprendizaje Where idobjeto_aprendizaje > 0)";
+    }
 
     $criterio = filter_input(INPUT_POST, 'tipo_criterio');
     $valor_criterio = filter_input(INPUT_POST, 'criterio_busqueda');
