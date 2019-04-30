@@ -149,7 +149,7 @@
             <div class="col-lg-6">
                 <ul class="list-inline banner-social-buttons">
                     <li><a href="https://github.com/jossued/ProyectoLibres" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a></li>
-                    <li><a href="https://epn.edu.ec" class="btn btn-default btn-lg"><i class="fa fa-book fa-fw"></i> <span class="network-name">EPN</span></a></li>
+                    <li><a href="https://www.epn.edu.ec" class="btn btn-default btn-lg"><i class="fa fa-book fa-fw"></i> <span class="network-name">EPN</span></a></li>
                     <li><a href="https://fis.epn.edu.ec/" class="btn btn-default btn-lg"><i class="fa fa-terminal fa-fw"></i> <span class="network-name">FIS</span></a></li>
                 </ul>
             </div>
