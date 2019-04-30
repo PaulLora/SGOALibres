@@ -1,13 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
--- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-08-2018 a las 04:19:41
--- Versión del servidor: 10.1.32-MariaDB
--- Versión de PHP: 7.2.5
+-- Tiempo de generación: 01-05-2019 a las 00:59:27
+-- Versión del servidor: 10.1.38-MariaDB
+-- Versión de PHP: 7.3.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -53,6 +51,31 @@ INSERT INTO `catalogooa` (`idCatalogoOA`, `materia`, `cantidad`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `colaborador`
+--
+
+CREATE TABLE `colaborador` (
+  `idColaborador` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `activo` varchar(1) DEFAULT 'T',
+  `colaboraciones` int(11) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `colaborador`
+--
+
+INSERT INTO `colaborador` (`idColaborador`, `idUsuario`, `activo`, `colaboraciones`) VALUES
+(1, 2, 'V', 0),
+(2, 9, 'V', 0),
+(3, 7, 'V', 0),
+(4, 11, 'V', 0),
+(5, 13, 'V', 0),
+(6, 12, 'V', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `comentario`
 --
 
@@ -64,13 +87,6 @@ CREATE TABLE `comentario` (
   `fechacomentario` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `rutaimagen` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `comentario`
---
-
-INSERT INTO `comentario` (`idcomentario`, `contenido`, `idusuario`, `id_objeto_aprendizaje`, `fechacomentario`, `rutaimagen`) VALUES
-(1, 'Este recurso no tiene bibliografía, por favor incluirla', 9, 16, '2018-07-26 22:01:31', '../../imagenes/');
 
 -- --------------------------------------------------------
 
@@ -123,18 +139,36 @@ CREATE TABLE `estudiante` (
   `id_usuario` int(11) DEFAULT NULL,
   `fecha_nacimiento` varchar(45) DEFAULT NULL,
   `genero` varchar(1) DEFAULT NULL,
-   `ciudad` varchar(10) DEFAULT NULL,
+  `ciudad` varchar(10) DEFAULT NULL,
   `domicilio` varchar(60) DEFAULT NULL,
   `celular` varchar(15) DEFAULT NULL,
   `convencional` varchar(15) DEFAULT NULL
- ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `estudiante`
 --
 
-INSERT INTO `estudiante` (`idestudiante`, `ci`, `nombres`, `apellidos`, `carrera`, `id_facultad`, `mail`, `id_usuario`) VALUES
-(1, '1714296603', 'Karina', 'Tapia', 'Sistemas', 8, 'alexisalex31@hotmail.com', 2);
+INSERT INTO `estudiante` (`idestudiante`, `ci`, `nombres`, `apellidos`, `carrera`, `id_facultad`, `mail`, `id_usuario`, `fecha_nacimiento`, `genero`, `ciudad`, `domicilio`, `celular`, `convencional`) VALUES
+(1, '1714296603', 'Karina', 'Tapia', 'Sistemas', 8, 'alexisalex31@hotmail.com', 2, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, '1724077100', 'paul', 'lora', 'Sistemas', 8, 'bryanr_122@hotmail.com', 11, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, '1726663980', 'Ronald', 'Alvarado', 'Sistemas', 8, 'ronald.al@gmail.com', 12, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, '1725839490', 'Katy', 'Sango', 'Sistemas', 8, 'ksango@gmail.com', 13, NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `experiencia`
+--
+
+CREATE TABLE `experiencia` (
+  `idComentario` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `descripcion` varchar(60) DEFAULT NULL,
+  `comentario` varchar(200) DEFAULT NULL,
+  `respondido` varchar(2) DEFAULT 'NO',
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -166,6 +200,35 @@ INSERT INTO `facultad` (`idfacultad`, `facultad`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `foro`
+--
+
+CREATE TABLE `foro` (
+  `idForo` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `titulo` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `mensaje` text COLLATE utf8_unicode_ci NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `respuestas` int(11) NOT NULL DEFAULT '0',
+  `identificador` int(7) NOT NULL DEFAULT '0',
+  `ult_respuesta` date DEFAULT NULL,
+  `imagen` varchar(45) COLLATE utf8_unicode_ci DEFAULT '',
+  `video` varchar(45) COLLATE utf8_unicode_ci DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `foro`
+--
+
+INSERT INTO `foro` (`idForo`, `idUsuario`, `titulo`, `mensaje`, `fecha`, `respuestas`, `identificador`, `ult_respuesta`, `imagen`, `video`) VALUES
+(1, 7, 'a', 'aa', '2019-04-23 20:48:39', 0, 0, NULL, 'imagenes/sgoa.sql', 'videos/sgoa.sql'),
+(2, 9, 'Exposicion', 'Exponer', '2019-04-23 21:50:26', 0, 0, NULL, 'imagenes/sgoa.sql', 'videos/sgoa.sql'),
+(3, 1, 'presentacion', 'presentar proyecto', '2019-04-23 22:39:46', 1, 0, NULL, 'imagenes/WhatsApp Image 2019-02-23 at 20.01.0', 'videos/WhatsApp Image 2019-02-23 at 20.01.00.'),
+(4, 1, 'x', 'asd', '2019-04-23 22:40:01', 0, 3, NULL, '', '');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `materia`
 --
 
@@ -188,18 +251,18 @@ INSERT INTO `materia` (`materia_id`, `materia_nombre`, `facultad_id`, `cantidad`
 (5, 'PROGRAMACIÓN II ', 8, 0),
 (6, 'SISTEMAS DE COMUNICACIÓN ', 8, 0),
 (7, 'ARQUITECTURA DE COMPUTADORES ', 8, 0),
-(8, 'ESTRUCTURA DE DATOS ', 8, 0),
+(8, 'ESTRUCTURA DE DATOS ', 8, 1),
 (9, 'REDES DE COMPUTADORES ', 8, 0),
 (10, 'SISTEMAS OPERATIVOS ', 8, 0),
 (11, 'COMPILADORES Y LENGUAJES', 8, 0),
 (12, 'BASES DE DATOS', 8, 0),
 (13, 'ALGORITMOS', 8, 3),
-(14, 'ALGORITMOS NUMERICOS', 8, 0),
+(14, 'ALGORITMOS NUMERICOS', 8, 3),
 (15, 'GESTION DE PROYECTOS ', 8, 0),
-(16, 'TCP-IP', 8, 0),
+(16, 'TCP-IP', 8, 1),
 (17, 'TECNOLOGÍAS DE SEGURIDAD', 8, 0),
-(18, 'INTELIGENCIA ARTIFICIAL', 8, 0),
-(19, 'BASES DE DATOS DISTRIBUIDAS', 8, 0),
+(18, 'INTELIGENCIA ARTIFICIAL', 8, 2),
+(19, 'BASES DE DATOS DISTRIBUIDAS', 8, 1),
 (20, 'INGENIERÍA DE SOFTWARE I', 8, 0),
 (21, 'APLICACIONES EN AMBIENTES PROPIETARIOS', 8, 0),
 (22, 'ADMINISTRACIÓN FINANCIERA', 8, 0),
@@ -208,7 +271,7 @@ INSERT INTO `materia` (`materia_id`, `materia_nombre`, `facultad_id`, `cantidad`
 (25, 'INGENIERÍA DE SOFTWARE II', 8, 1),
 (26, 'APLICACIONES EN AMBIENTES LIBRES', 8, 0),
 (27, 'LEGISLACIÓN INFORMÁTICA', 8, 0),
-(28, 'DISEÑO DE PROCESOS ORGANIZACIONALES', 8, 0),
+(28, 'DISEÑO DE PROCESOS ORGANIZACIONALES', 8, 1),
 (29, 'ADMINISTRACIÓN DE SISTEMAS OPERATIVOS Y REDES', 8, 0),
 (30, 'CALIDAD DE SOFTWARE', 8, 0),
 (31, 'ADMINISTRACIÓN DE BASES DE DATOS', 8, 0),
@@ -262,7 +325,7 @@ INSERT INTO `materia` (`materia_id`, `materia_nombre`, `facultad_id`, `cantidad`
 (79, 'DINAMICA', 6, 0),
 (80, 'TERMODINAMICA', 7, 0),
 (81, 'FISICO QUIMICA', 7, 0),
-(82, 'TERMODINAMICA', 7, 0),
+(82, 'TERMODINAMICA', 7, 1),
 (83, 'QUIMICA ANALITICA', 7, 0),
 (84, 'QUIMICA ORGANICA', 7, 0),
 (85, 'BIOQUIMICA', 7, 0),
@@ -296,9 +359,13 @@ CREATE TABLE `objeto_aprendizaje` (
 --
 
 INSERT INTO `objeto_aprendizaje` (`idobjeto_aprendizaje`, `nombre`, `descripcion`, `id_usuario`, `institucion`, `fechaCreacion`, `palabras_clave`, `tamanio`, `ruta`, `materia`, `descarga`) VALUES
-(12, 'ecotec', 'ecol', 4, 'EPN', '2018-07-24 22:17:50', 'eco', '123391', '../../storage/ecotec.zip', 'GEOQUIMICA', 2),
-(13, 'ControlVersiones', 'Versiones', 4, 'EPN', '2018-07-26 21:17:28', 'git', '254048', '../../storage/ControlVersiones.zip', 'ALGORITMOS', 0),
-(16, 'Metodos', 'Agiles', 4, 'EPN', '2018-07-26 21:49:01', 'metodos agiles', '116845', '../../storage/Metodos.zip', 'INGENIERÍA DE SOFTWARE II', 1);
+(20, 'ghgh', 'ghgh', 7, 'ghgh', '2019-04-23 20:47:16', 'ghgh', '19496', '../../storage/ghgh.sql', 'ALGORITMOS NUMERICOS', 2),
+(21, 'asd', 'asd', 9, 'asd', '2019-04-23 21:41:05', 'asd', '19496', '../../storage/asd.sql', 'TERMODINAMICA', 0),
+(22, 'sd', 'dsf', 9, 'asf', '2019-04-23 22:41:10', 'fsd', '119516', '../../storage/sd.jpeg', 'DISEÑO DE PROCESOS ORGANIZACIONALES', 1),
+(23, 'asd', 'asd', 7, 'asd', '2019-04-23 22:42:56', 'asd', '0', '../../storage/asd.JPG', 'BASES DE DATOS DISTRIBUIDAS', 3),
+(24, 'Inteligencia Artificial - Agentes Inteligente', 'Agentes', 11, 'EPN', '2019-04-30 22:54:24', 'Agentes, IA', '465699', '../../storage/Inteligencia+Artificial+-+Agent', 'INTELIGENCIA ARTIFICIAL', 0),
+(25, 'Estrucura de datos', 'Estructuras de datos con definiciones', 13, 'EPN', '2019-04-30 22:57:56', 'Estructuras', '553586', '../../storage/Estrucura+de+datos.rar', 'ESTRUCTURA DE DATOS ', 0),
+(26, 'Metodos numericos', 'Algoritmos numericos', 12, 'EPN', '2019-04-30 22:58:54', 'Algoritmos', '268585', '../../storage/Metodos+numericos.rar', 'ALGORITMOS NUMERICOS', 0);
 
 -- --------------------------------------------------------
 
@@ -327,10 +394,9 @@ CREATE TABLE `profesor` (
 -- Volcado de datos para la tabla `profesor`
 --
 
-INSERT INTO `profesor` (`idprofesor`, `ci`, `nombres`, `apellidos`, `id_departamento`, `id_facultad`, `mail`, `id_usuario`) VALUES
-(1, '1725790032', 'Alexis', 'Maldonado', 11, 2, 'alexis.maldonado@epn.edu.ec', 4),
-(2, '1725790032', 'Fernando', 'Tapia', 7, 6, 'alexisalex31@hotmail.com', 5),
-(3, '0802548578', 'Maria', 'Intriago', 17, 8, 'monserrate.intriago@epn.edu.ec', 9);
+INSERT INTO `profesor` (`idprofesor`, `ci`, `nombres`, `apellidos`, `id_departamento`, `id_facultad`, `mail`, `id_usuario`, `fecha_nacimiento`, `genero`, `ciudad`, `domicilio`, `celular`, `convencional`) VALUES
+(3, '0802548578', 'Maria', 'Intriago', 17, 8, 'monserrate.intriago@epn.edu.ec', 9, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, '1724077100', 'Bryan', 'Lora Revelo', 17, 8, 'bryanr_122@hotmail.com', 10, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -351,15 +417,17 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`idUsuario`, `usuario`, `contrasenia`, `tipo_usuario`, `activo`) VALUES
-(1, 'admin', 'admin', 'ADM', 'V'),
-(2, 'ktapia', 'hola123', 'EST', 'V'),
-(4, 'AlexisMaldonado0', 'alexis', 'PRO', 'V'),
-(5, 'FernandoTapia0', 'bESn9', 'PRO', 'F'),
-(6, 'mmjaramilloarteaga', 'mmjaramilloarteaga', 'EST', 'V'),
-(7, 'mmjaramillo', 'mmjaramillo', 'EST', 'V'),
-(8, 'mmjaramillo', '123', 'EST', 'V'),
-(9, 'MariaIntriago0', 'gcjFI', 'PRO', 'V');
+INSERT INTO `usuario` (`idUsuario`, `usuario`, `contrasenia`, `tipo_usuario`, `activo`, `foto`) VALUES
+(1, 'admin', 'admin', 'ADM', 'V', ''),
+(2, 'ktapia', 'hola123', 'EST', 'V', ''),
+(6, 'mmjaramilloarteaga', 'mmjaramilloarteaga', 'EST', 'V', ''),
+(7, 'mmjaramillo', 'mmjaramillo', 'EST', 'V', ''),
+(8, 'mmjaramillo', '123', 'EST', 'V', ''),
+(9, 'MariaIntriago0', 'gcjFI', 'PRO', 'V', ''),
+(10, 'BryanLora0', 'AxaNF', 'PRO', 'F', ''),
+(11, 'paul', 'paul', 'EST', 'V', ''),
+(12, 'ro11', 'ro11', 'EST', 'V', ''),
+(13, 'kats', 'kats', 'EST', 'V', '');
 
 -- --------------------------------------------------------
 
@@ -387,10 +455,21 @@ INSERT INTO `valoracion` (`idvaloracion`, `idobjeto_aprendizaje`, `idusuario`, `
 (7, 12, 4, 1);
 
 --
+-- Índices para tablas volcadas
+--
+
+--
 -- Indices de la tabla `catalogooa`
 --
 ALTER TABLE `catalogooa`
   ADD PRIMARY KEY (`idCatalogoOA`);
+
+--
+-- Indices de la tabla `colaborador`
+--
+ALTER TABLE `colaborador`
+  ADD PRIMARY KEY (`idColaborador`),
+  ADD KEY `idUsuario` (`idUsuario`);
 
 --
 -- Indices de la tabla `comentario`
@@ -415,10 +494,24 @@ ALTER TABLE `estudiante`
   ADD KEY `fk_estudiante_facultad1_idx` (`id_facultad`);
 
 --
+-- Indices de la tabla `experiencia`
+--
+ALTER TABLE `experiencia`
+  ADD PRIMARY KEY (`idComentario`),
+  ADD KEY `idUsuario` (`idUsuario`);
+
+--
 -- Indices de la tabla `facultad`
 --
 ALTER TABLE `facultad`
   ADD PRIMARY KEY (`idfacultad`);
+
+--
+-- Indices de la tabla `foro`
+--
+ALTER TABLE `foro`
+  ADD PRIMARY KEY (`idForo`),
+  ADD KEY `idUsuario` (`idUsuario`);
 
 --
 -- Indices de la tabla `materia`
@@ -466,10 +559,16 @@ ALTER TABLE `catalogooa`
   MODIFY `idCatalogoOA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT de la tabla `colaborador`
+--
+ALTER TABLE `colaborador`
+  MODIFY `idColaborador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  MODIFY `idcomentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idcomentario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `departamento`
@@ -481,13 +580,25 @@ ALTER TABLE `departamento`
 -- AUTO_INCREMENT de la tabla `estudiante`
 --
 ALTER TABLE `estudiante`
-  MODIFY `idestudiante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idestudiante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `experiencia`
+--
+ALTER TABLE `experiencia`
+  MODIFY `idComentario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `facultad`
 --
 ALTER TABLE `facultad`
   MODIFY `idfacultad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `foro`
+--
+ALTER TABLE `foro`
+  MODIFY `idForo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `materia`
@@ -499,19 +610,19 @@ ALTER TABLE `materia`
 -- AUTO_INCREMENT de la tabla `objeto_aprendizaje`
 --
 ALTER TABLE `objeto_aprendizaje`
-  MODIFY `idobjeto_aprendizaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `idobjeto_aprendizaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `profesor`
 --
 ALTER TABLE `profesor`
-  MODIFY `idprofesor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idprofesor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `valoracion`
@@ -522,6 +633,12 @@ ALTER TABLE `valoracion`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `colaborador`
+--
+ALTER TABLE `colaborador`
+  ADD CONSTRAINT `colaborador_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`);
 
 --
 -- Filtros para la tabla `comentario`
@@ -536,6 +653,18 @@ ALTER TABLE `comentario`
 ALTER TABLE `estudiante`
   ADD CONSTRAINT `fk_estudiante_facultad1` FOREIGN KEY (`id_facultad`) REFERENCES `facultad` (`idfacultad`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_estudiante_usuario1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `experiencia`
+--
+ALTER TABLE `experiencia`
+  ADD CONSTRAINT `experiencia_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`);
+
+--
+-- Filtros para la tabla `foro`
+--
+ALTER TABLE `foro`
+  ADD CONSTRAINT `foro_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`);
 
 --
 -- Filtros para la tabla `materia`
@@ -556,52 +685,6 @@ ALTER TABLE `profesor`
   ADD CONSTRAINT `fk_profesor_departamento1` FOREIGN KEY (`id_departamento`) REFERENCES `departamento` (`iddepartamento`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_profesor_facultad1` FOREIGN KEY (`id_facultad`) REFERENCES `facultad` (`idfacultad`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_profesor_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE NO ACTION;
-COMMIT;
-
-CREATE TABLE `experiencia` (
- `idComentario` INT AUTO_INCREMENT PRIMARY KEY,
- `idUsuario` INT NOT NULL,
- `descripcion` VARCHAR(60),
- `comentario` VARCHAR(200),
- `respondido` VARCHAR(2) DEFAULT 'NO',
-  `fecha` timestamp DEFAULT CURRENT_TIMESTAMP);
-
-  ALTER TABLE `experiencia`
-  ADD FOREIGN KEY (idUsuario)
-  REFERENCES usuario(idUsuario);
-
-CREATE TABLE IF NOT EXISTS `foro` (
-  `idForo` INT AUTO_INCREMENT PRIMARY KEY,
-  `idUsuario` INT NOT NULL,
-  `titulo` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `mensaje` text COLLATE utf8_unicode_ci NOT NULL,
-  `fecha` timestamp DEFAULT CURRENT_TIMESTAMP,
-  `respuestas` int(11) NOT NULL DEFAULT '0',
-  `identificador` int(7) NOT NULL DEFAULT '0',
-  `ult_respuesta` date DEFAULT NULL, 
-  `imagen` varchar(45) DEFAULT '',
-  `video` varchar(45) DEFAULT ''
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-ALTER TABLE `foro`
-  ADD FOREIGN KEY (idUsuario)
-  REFERENCES usuario(idUsuario);
-
---
--- Estructura de tabla para la tabla `colaborador`
---
-
-CREATE TABLE IF NOT EXISTS `colaborador` (
-  `idColaborador` int(11) AUTO_INCREMENT PRIMARY KEY,
-  `idUsuario` int(11) NOT NULL,
-  `activo` varchar(1) DEFAULT 'T',
-  `colaboraciones` int(11) DEFAULT 0 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-ALTER TABLE `colaborador`
-  ADD FOREIGN KEY (idUsuario)
-  REFERENCES usuario(idUsuario);
-
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
