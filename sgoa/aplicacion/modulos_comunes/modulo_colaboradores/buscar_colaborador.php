@@ -1,14 +1,12 @@
 <?php
-session_start();
-if (@!$_SESSION['usuario']) {
-    header("Location:../../../index.php");
-} elseif ($_SESSION['tipo_usuario'] == 'EST') {
-        
-} elseif ($_SESSION['tipo_usuario'] == 'ADM') {
-    
-}
-   
-    
+    session_start();
+    if (@!$_SESSION['usuario']) {
+        header("Location:../../../index.php");
+    } elseif ($_SESSION['tipo_usuario'] == 'EST') {
+
+    } elseif ($_SESSION['tipo_usuario'] == 'ADM') {
+
+    }
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -133,7 +131,7 @@ if (@!$_SESSION['usuario']) {
         -webkit-column-count: 3; /* Chrome, Safari, Opera */
         -moz-column-count: 3; /* Firefox */
         column-count: 2;
-        
+
     }
 </style>
 
@@ -239,7 +237,7 @@ Debe tener la opción de buscar por: apellido o cédula.
                     <h2>BÚSQUEDA DE COLABORADORES</h2>
             <form action="buscar_colaborador.php" method="post" enctype="multipart/form-data">
                     <div class="col-md-3">
-                        </div>            
+                        </div>
                         <div class="col-md-3 text-left ">
                             <select class= "form-control" name="tipo_criterio" dir="ltr" required>
                                 <option value="">Buscar por:</option>
@@ -248,7 +246,7 @@ Debe tener la opción de buscar por: apellido o cédula.
                             </select><br>
                         </div>
                     <!--<input type="text" class="form-control" id="criterio_busqueda" placeholder="Buscar...." name="criterio_busqueda" required></br>-->
-               
+
                     <div class="col-md-3 text-center">
                             <input type="text" class="form-control" id="criterio_busqueda" placeholder="Buscar...." name="criterio_busqueda" required></br>
                         </div>
