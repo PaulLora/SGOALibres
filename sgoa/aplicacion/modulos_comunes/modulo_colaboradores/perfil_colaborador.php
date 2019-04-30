@@ -159,7 +159,6 @@ if (@!$_SESSION['usuario']) {
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="buscar_colaborador.php">Buscar</a></li>
-                        <li><a href="registrar_colaborador.php">Registrarse</a></li>
                         <li><a href="perfil_colaborador.php">Perfil</a></li>
                         <li><a href="actualizar_datos_colaborador.php">Actualizar datos</a></li>
                     </ul>

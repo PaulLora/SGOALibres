@@ -89,7 +89,6 @@ if (@!$_SESSION['usuario']) {
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="../modulos_comunes/modulo_colaboradores/buscar_colaborador.php">Buscar</a></li>
-                        <li><a href="../modulos_comunes/modulo_colaboradores/registrar.php">Registrarse</a></li>
                         <li><a href="../modulos_comunes/modulo_colaboradores/perfil_colaborador.php">Perfil</a></li>
                         <li><a href="../modulos_comunes/modulo_colaboradores/actualizar_datos_colaborador.php">Actualizar datos</a></li>
                     </ul>
@@ -199,11 +198,17 @@ if (@!$_SESSION['usuario']) {
                             echo '<td>' . number_format($row['tamanio'] / 1e6, 2, '.', '') . ' MB' . '</td>';
                             if (obtener_tipo_usuario_con_id($row['id_usuario']) == 'ADM') {
                                 echo '<td>ADMINISTRADOR</td>';
-                            } else {
-                                $profesor = obtener_profesor_como_arreglo(obtener_id_profesor_con_id_usuario($row['id_usuario']));
-                                echo '<td>' . $profesor['nombres'] . ' ' . $profesor['apellidos'] . '</td>';
                             }
-                            //echo '<td>' . $row['ruta'] . '</td>';
+                            if (obtener_tipo_usuario_con_id($row['id_usuario']) == 'PRO'){
+                                $profesor = obtener_profesor_como_arreglo(obtener_id_profesor_con_id_usuario($row['id_usuario']));
+                                echo '<td>' . $profesor['nombres'] . ' ' . $profesor[
+                                    'apellidos'] . '</td>';
+                            }
+                            if (obtener_tipo_usuario_con_id($row['id_usuario']) == 'EST'){
+                                $estudiante = obtener_estudiante_como_arreglo(obtener_id_estudiante_con_id_usuario($row['id_usuario']));
+                                echo '<td>' . $estudiante['nombres'] . ' ' . $estudiante['apellidos'] . '</td>';
+                            }
+                            
                             echo '<td><a href="est_comentarios.php?id=' . $row['idobjeto_aprendizaje'] . '">' . obtener_nro_comentarios_oa($row['idobjeto_aprendizaje']) . '</a></td>';
                             
                             echo '<td><a href="' . $row['ruta'] . '">Descargar</a></td>';

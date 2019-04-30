@@ -237,7 +237,6 @@ if ($_SESSION['tipo_usuario'] == 'ADM' ){
                 <span class="caret"></span></a>
             <ul class="dropdown-menu">
                 <li><a href="../modulo_colaboradores/buscar_colaborador.php">Buscar</a></li>
-                <li><a href="../modulo_colaboradores/registrar.php">Registrarse</a></li>
                 <li><a href="../modulo_colaboradores/perfil_colaborador.php">Perfil</a></li>
                 <li><a href="../modulo_colaboradores/actualizar_datos_colaborador.php">Actualizar datos</a></li>
             </ul>

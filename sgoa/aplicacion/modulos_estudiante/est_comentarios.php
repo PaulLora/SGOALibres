@@ -214,7 +214,6 @@ if (@!$_SESSION['usuario']) {
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="../modulos_comunes/modulo_colaboradores/buscar_colaborador.php">Buscar</a></li>
-                        <li><a href="../modulos_comunes/modulo_colaboradores/registrar.php">Registrarse</a></li>
                         <li><a href="../modulos_comunes/modulo_colaboradores/perfil_colaborador.php">Perfil</a></li>
                         <li><a href="../modulos_comunes/modulo_colaboradores/actualizar_datos_colaborador.php">Actualizar datos</a></li>
                     </ul>
@@ -357,8 +356,6 @@ if (@!$_SESSION['usuario']) {
                 modal.style.display = "none";
                 }
     </script>
-                                   
-                
                </tbody>
                     </div>
 
