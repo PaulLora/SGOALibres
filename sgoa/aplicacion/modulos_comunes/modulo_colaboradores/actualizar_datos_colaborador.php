@@ -189,9 +189,7 @@ $nombre = $_SESSION['usuario'];
 <?php
     require '../../clases_negocio/clase_conexion.php';
     $idLogin = $_SESSION['id'];
-    echo "Id User: ".$idLogin."<br>";
     $nombre = $_SESSION['usuario'];
-    echo "Usuario".$nombre;
     $tipo_usuario = $_SESSION['tipo_usuario'];
 
     if($tipo_usuario =='PRO'){

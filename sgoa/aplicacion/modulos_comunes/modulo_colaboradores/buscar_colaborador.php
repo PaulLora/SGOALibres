@@ -1,14 +1,12 @@
 <?php
-session_start();
-if (@!$_SESSION['usuario']) {
-    header("Location:../../../index.php");
-} elseif ($_SESSION['tipo_usuario'] == 'EST') {
-        
-} elseif ($_SESSION['tipo_usuario'] == 'ADM') {
-    
-}
-   
-    
+    session_start();
+    if (@!$_SESSION['usuario']) {
+        header("Location:../../../index.php");
+    } elseif ($_SESSION['tipo_usuario'] == 'EST') {
+
+    } elseif ($_SESSION['tipo_usuario'] == 'ADM') {
+
+    }
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -133,7 +131,7 @@ if (@!$_SESSION['usuario']) {
         -webkit-column-count: 3; /* Chrome, Safari, Opera */
         -moz-column-count: 3; /* Firefox */
         column-count: 2;
-        
+
     }
 </style>
 
@@ -239,7 +237,7 @@ Debe tener la opción de buscar por: apellido o cédula.
                     <h2>BÚSQUEDA DE COLABORADORES</h2>
             <form action="buscar_colaborador.php" method="post" enctype="multipart/form-data">
                     <div class="col-md-3">
-                        </div>            
+                        </div>
                         <div class="col-md-3 text-left ">
                             <select class= "form-control" name="tipo_criterio" dir="ltr" required>
                                 <option value="">Buscar por:</option>
@@ -248,7 +246,7 @@ Debe tener la opción de buscar por: apellido o cédula.
                             </select><br>
                         </div>
                     <!--<input type="text" class="form-control" id="criterio_busqueda" placeholder="Buscar...." name="criterio_busqueda" required></br>-->
-               
+
                     <div class="col-md-3 text-center">
                             <input type="text" class="form-control" id="criterio_busqueda" placeholder="Buscar...." name="criterio_busqueda" required></br>
                         </div>
@@ -280,9 +278,16 @@ Debe tener la opción de buscar por: apellido o cédula.
     $idLogin = $_SESSION['id'];
     $nombre = $_SESSION['usuario'];
     require '../../clases_negocio/clase_conexion.php';
+    require '../../clases_negocio/funciones_oa_profesor.php';
+    require '../../clases_negocio/funciones_oa_estudiante.php';
 
     $conexion = new Conexion();
-    $statement = "SELECT pro.apellidos, u.usuario,  u.tipo_usuario, pro.ci, pro.mail ,u.idUsuario, OA.ruta FROM estudiante AS pro JOIN usuario AS u ON (pro.id_usuario=u.idUsuario) JOIN objeto_aprendizaje AS OA ON OA.id_usuario=u.idUsuario Where pro.id_usuario in ( select id_usuario from objeto_aprendizaje Where idobjeto_aprendizaje > 0)";
+    if(obtener_tipo_usuario_con_id($idLogin) == 'PRO'){
+        $statement = "SELECT pro.apellidos, u.usuario,  u.tipo_usuario, pro.ci, pro.mail ,u.idUsuario, OA.ruta FROM profesor AS pro JOIN usuario AS u ON (pro.id_usuario=u.idUsuario) JOIN objeto_aprendizaje AS OA ON OA.id_usuario=u.idUsuario Where pro.id_usuario in ( select id_usuario from objeto_aprendizaje Where idobjeto_aprendizaje > 0)";
+    }
+    if(obtener_tipo_usuario_con_id($idLogin) == 'EST'){
+        $statement = "SELECT pro.apellidos, u.usuario,  u.tipo_usuario, pro.ci, pro.mail ,u.idUsuario, OA.ruta FROM estudiante AS pro JOIN usuario AS u ON (pro.id_usuario=u.idUsuario) JOIN objeto_aprendizaje AS OA ON OA.id_usuario=u.idUsuario Where pro.id_usuario in ( select id_usuario from objeto_aprendizaje Where idobjeto_aprendizaje > 0)";
+    }
 
     $criterio = filter_input(INPUT_POST, 'tipo_criterio');
     $valor_criterio = filter_input(INPUT_POST, 'criterio_busqueda');

@@ -71,7 +71,6 @@ if (@!$_SESSION['usuario']) {
         -webkit-column-count: 3; /* Chrome, Safari, Opera */
         -moz-column-count: 3; /* Firefox */
         column-count: 2;
-        
     }
 </style>
 
@@ -181,7 +180,6 @@ if (@!$_SESSION['usuario']) {
                     echo '<td>' . $row['fechaCreacion'] . '</td>';
                     echo '<td>' . $row['palabras_clave'] . '</td>';
                     echo '<td>' . number_format($row['tamanio'] / 1e6, 2, '.', '') . ' MB' . '</td>';
-                    echo "Estoy en profesor";
                     if (obtener_tipo_usuario_con_id($row['id_usuario']) == 'ADM') {
                         echo '<td>ADMINISTRADOR</td>';
                     }
