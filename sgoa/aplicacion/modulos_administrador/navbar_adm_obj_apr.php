@@ -30,7 +30,7 @@
                     </ul>
                 </li>
                 <li><a href="adm_herramientas.php">Herramientas</a></li>
-                <li><a href="../modulos_comunes/modulo_foro/index.php">Foro</a></li>
+                <li><a href="../modulos_comunes/modulo_foro/foro.php">Foro</a></li>
               
             </ul>
             <ul class="nav navbar-nav navbar-right">

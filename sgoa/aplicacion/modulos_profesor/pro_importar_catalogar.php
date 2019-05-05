@@ -169,7 +169,7 @@ if (isset($_GET['mensaje'])) {
 
                                     while($row = mysqli_fetch_array($result)){
                                 ?>
-                                    <option value = "<?php echo $row['idfacultad'];?>"> <?php echo $row['facultad'];?></option>
+                                    <option value = <?php echo $row['idfacultad'];?>> <?php echo $row['facultad'];?></option>
                                 <?php
                                     }
                                 ?>
