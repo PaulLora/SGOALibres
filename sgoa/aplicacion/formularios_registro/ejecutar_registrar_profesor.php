@@ -16,10 +16,10 @@ if(insertar_profesor($cedula, $nombres, $apellidos, $departamento, $facultad, $e
      enviar_mail3($email,$usuario,$contrasenia);
 	 echo '<script>alert("Usuario registrado correctamente! Revise su mail para obtener las credenciales")</script> ';
 	
-     echo "<script>location.href='../../aplicacion/formularios_registro/Login.php'</script>";
+     echo '<meta http-equiv="Refresh" content="5; Login.php">';
 }else{
     echo '<script>alert("No se ha podido registrar el usuario. Contacte a un administrador")</script> ';
-    echo "<script>location.href='../../aplicacion/formularios_registro/Login.php'</script>";
+    echo '<meta http-equiv="Refresh" content="5; Login.php">';
 }
 
 ?>

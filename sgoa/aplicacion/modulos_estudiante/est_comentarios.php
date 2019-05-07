@@ -230,8 +230,8 @@ if (@!$_SESSION['usuario']) {
 
         <?php
         require_once '../clases_negocio/clase_conexion.php';
-        require '../clases_negocio/funciones_oa_estudiante.php';
-        require '../clases_negocio/funciones_oa_profesor.php';
+        require_once '../clases_negocio/funciones_oa_estudiante.php';
+        require_once '../clases_negocio/funciones_oa_profesor.php';
         $id_objeto_aprendizaje = filter_input(INPUT_GET, 'id');
         function verificarValoracion($x){
         echo '<script type="text/javascript"> verificar('.$x.') </script>';
